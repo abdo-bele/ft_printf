@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-SRC = ft_putchar.c ft_putstr.c ft_putnbr.c ft_printf.c
+SRC = ft_putchar.c ft_putstr.c ft_putnbr.c ft_printf.c ft_printf.c ft_puthexa.c
 
 SRCB = 
 
@@ -12,7 +12,7 @@ CFALGS =  -Wall -Wextra -Werror
 
 CC = cc
 
-INCLUDE = libft.h
+INCLUDE = ft_printf.h
 
 all: $(NAME)
 
@@ -22,8 +22,6 @@ $(NAME): $(OBJ)
 %.o : %.c $(INCLUDE)
 	@$(CC) $(CFALGS) -c $< -o $@
 
-bonus: $(OBJB)
-	@ar rc $(NAME) $(OBJB)
 
 clean:
 	@rm -rf $(OBJ) $(OBJB)

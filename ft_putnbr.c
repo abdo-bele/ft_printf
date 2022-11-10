@@ -6,7 +6,7 @@
 /*   By: aarchtou <aarchtou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:31:28 by aarchtou          #+#    #+#             */
-/*   Updated: 2022/11/08 18:08:12 by aarchtou         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:35:25 by aarchtou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,4 @@ int	ft_putnbr(int nb)
 	else
 		len += ft_putchar(nb + 48);
 	return (len);
-}
-
-int main()
-{
-	printf("\n%d\n", ft_putnbr(56465));
-	return (0);
 }

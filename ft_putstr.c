@@ -6,20 +6,23 @@
 /*   By: aarchtou <aarchtou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:31:36 by aarchtou          #+#    #+#             */
-/*   Updated: 2022/11/08 17:48:38 by aarchtou         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:45:00 by aarchtou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *str)
+int	ft_putstr(char *str)
 {
 	int	a;
+	int	i;
 
 	a = 0;
+	i = 0;
 	while (str[a])
 	{
-		write (1, &str[a], 1);
+		i = write (1, &str[a], 1);
 		a++;
 	}
+	return (i);
 }
