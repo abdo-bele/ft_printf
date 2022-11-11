@@ -6,21 +6,36 @@
 /*   By: aarchtou <aarchtou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:04:08 by aarchtou          #+#    #+#             */
-/*   Updated: 2022/11/10 19:02:16 by aarchtou         ###   ########.fr       */
+/*   Updated: 2022/11/11 14:58:32 by aarchtou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthex(int i)
+void	ft_nb0(char *h, int *len)
 {
-	int		len;
-	int		a;
-	int		b;
-	char	*h;
-	char	*bas;
+	h = "0x0";
+	ft_putstr(h, len);
+	return ;
+}
 
-	len = 0;
+void	ft_nb01(char *h, int *len)
+{
+	h = "0";
+	ft_putstr(h, len);
+	return ;
+}
+
+void	ft_puthex(unsigned int i, int *len)
+{
+	int				a;
+	unsigned int	b;
+	char			*h;
+	char			*bas;
+
+	h = NULL;
+	if (i == 0)
+		return (ft_nb01(h, len));
 	b = i;
 	a = 0;
 	bas = "0123456789abcdef";
@@ -32,22 +47,21 @@ int	ft_puthex(int i)
 	{
 		h[a] = bas[(i % 16)];
 		i = i / 16;
-		len++;
 	}
-	ft_putstr(h);
+	ft_putstr(h, len);
 	free(h);
-	return (len);
 }
 
-int	ft_puthex1(int i)
+void	ft_puthex1(unsigned int i, int *len)
 {
-	int		len;
-	int		a;
-	int		b;
-	char	*h;
-	char	*bas;
+	int				a;
+	unsigned int	b;
+	char			*h;
+	char			*bas;
 
-	len = 0;
+	h = NULL;
+	if (i == 0)
+		return (ft_nb01(h, len));
 	b = i;
 	a = 0;
 	bas = "0123456789ABCDEF";
@@ -59,22 +73,21 @@ int	ft_puthex1(int i)
 	{
 		h[a] = bas[(i % 16)];
 		i = i / 16;
-		len++;
 	}
-	ft_putstr(h);
+	ft_putstr(h, len);
 	free(h);
-	return (len);
 }
 
-int	ft_puthexlong(size_t i)
+void	ft_puthexlong(size_t i, int *len)
 {
-	int		len;
 	int		a;
 	size_t	b;
 	char	*h;
 	char	*bas;
 
-	len = 0;
+	h = NULL;
+	if (i == 0)
+		return (ft_nb0(h, len));
 	b = i;
 	a = 0;
 	bas = "0123456789abcdef";
@@ -86,11 +99,9 @@ int	ft_puthexlong(size_t i)
 	{
 		h[a + 2] = bas[(i % 16)];
 		i = i / 16;
-		len++;
 	}
 	h[0] = '0';
 	h[1] = 'x';
-	ft_putstr(h);
+	ft_putstr(h, len);
 	free(h);
-	return (len);
 }

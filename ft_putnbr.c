@@ -6,33 +6,42 @@
 /*   By: aarchtou <aarchtou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:31:28 by aarchtou          #+#    #+#             */
-/*   Updated: 2022/11/10 19:35:25 by aarchtou         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:06:00 by aarchtou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int nb)
+void	ft_putnbr(int nb, int *len)
 {
-	int	len;
-
-	len = 0;
 	if (nb == -2147483648)
 	{
 		write (1, "-2147483648", 11);
-		return (11);
+		(*len) += 11;
+		return ;
 	}
 	if (nb < 0)
 	{
 		write (1, "-", 1);
 		nb *= -1;
+		(*len)++;
 	}
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putnbr(nb / 10, len);
+		ft_putnbr(nb % 10, len);
 	}
 	else
-		len += ft_putchar(nb + 48);
-	return (len);
+		ft_putchar(nb + 48, len);
+}
+
+void	ft_putnbr1(unsigned int nb, int *len)
+{
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10, len);
+		ft_putnbr(nb % 10, len);
+	}
+	else
+		ft_putchar(nb + 48, len);
 }

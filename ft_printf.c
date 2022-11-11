@@ -6,34 +6,32 @@
 /*   By: aarchtou <aarchtou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:31:19 by aarchtou          #+#    #+#             */
-/*   Updated: 2022/11/10 19:35:31 by aarchtou         ###   ########.fr       */
+/*   Updated: 2022/11/11 19:07:23 by aarchtou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print(char *abdo, va_list arg)
+void	ft_print(char *abdo, va_list arg, int *len)
 {
-	int	i;
-
-	i = 0;
 	if (*abdo == 'd')
-		i += ft_putnbr(va_arg(arg, int));
+		ft_putnbr(va_arg(arg, int), len);
 	if (*abdo == 's')
-		i += ft_putstr(va_arg(arg, char *));
+		ft_putstr(va_arg(arg, char *), len);
 	if (*abdo == 'c')
-		i += ft_putchar(va_arg(arg, int));
+		ft_putchar(va_arg(arg, int), len);
 	if (*abdo == 'p')
-		i += ft_puthexlong(va_arg(arg, size_t));
+		ft_puthexlong(va_arg(arg, size_t), len);
 	if (*abdo == 'i')
-		i += ft_putnbr(va_arg(arg, int));
+		ft_putnbr(va_arg(arg, int), len);
 	if (*abdo == 'x')
-		i += ft_puthex(va_arg(arg, unsigned int));
+		ft_puthex(va_arg(arg, unsigned int), len);
 	if (*abdo == 'X')
-		i += ft_puthex1(va_arg(arg, unsigned int));
+		ft_puthex1(va_arg(arg, unsigned int), len);
 	if (*abdo == 'u')
-		i += ft_putnbr(va_arg(arg, int));
-	return (i);
+		ft_putnbr1(va_arg(arg, unsigned int), len);
+	if (*abdo == '%')
+		ft_putchar('%', len);
 }
 
 int	ft_printf(const char *abdo, ...)
@@ -49,21 +47,13 @@ int	ft_printf(const char *abdo, ...)
 	{
 		if (abdo[i] == '%')
 		{
-			t += ft_print((char *)&abdo[i + 1], arg);
+			ft_print((char *)&abdo[i + 1], arg, &t);
 			i++;
 		}
 		else
-			t += ft_putchar(abdo[i]);
+			ft_putchar(abdo[i], &t);
 		i++;
 	}
+	va_end(arg);
 	return (t);
 }
-
-// int	main(void)
-// {
-// 	int a;
-// 	a = 5;
-// 	ft_printf("%p\n",&a);
-// 	printf("%p",&a);
-// 	return (0);
-// }
